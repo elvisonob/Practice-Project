@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.layout {
+    border-style: solid;
+    margin-top: 2rem;
+    max-width: 50%;
+    text-align: center;
+    display: grid;
+}
+
+.content {
+    border-style: groove;
+    margin-top: 16px;
+    max-width: 50%;
+}
+
+.layout button {
+    max-width: 3rem;
+    color: red;
+    align-self: center;
+}

@@ -17,7 +17,7 @@ const HomePage = () => {
     setMessage(e.target.value);
   };
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
     console.log(name);
     console.log(email);
@@ -25,6 +25,27 @@ const HomePage = () => {
     setName('');
     setEmail('');
     setMessage('');
+
+    try {
+      const response = await fetch(
+        'http://localhost:5000/content/post-content',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ name, email, message }),
+        }
+      );
+
+      if (!response.ok) {
+        throw Error('Something is wrong');
+      }
+      const data = await response.json();
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
