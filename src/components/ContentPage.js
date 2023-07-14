@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import classes from './ContentPage.module.css';
 
-const ContentPage = () => {
+const ContentPage = (props) => {
   const [data, setData] = useState([]);
 
   const sendingGetRequest = async () => {
@@ -14,7 +14,7 @@ const ContentPage = () => {
 
       const data = await response.json();
       setData(data.contents);
-      console.log(data);
+      console.log(data.contents);
     } catch (err) {
       console.log(err);
     }
@@ -27,16 +27,18 @@ const ContentPage = () => {
   return (
     <div className={classes.layout}>
       <div className={classes.content}>
-        {data.map((post) => (
-          <ul>
-            <li>{post.name}</li>
-            <li>{post.email}</li>
-            <li>{post.message}</li>
-          </ul>
-        ))}
+        <ul>
+          {data.map((post) => (
+            <li key={post.id}>
+              <p>{post.name}</p>
+              <p>{post.email}</p>
+              <p>{post.message}</p>
+              <button onClick={props.onOpenNewForm}>Edit</button>
+              <button>Delete</button>
+            </li>
+          ))}
+        </ul>
       </div>
-      <button>Edit</button>
-      <button>Delete</button>
     </div>
   );
 };

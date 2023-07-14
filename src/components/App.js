@@ -1,12 +1,20 @@
 import HomePage from './HomePage.js';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import ContentPage from './ContentPage';
+import EditContent from './EditContent';
 
 const App = () => {
+  const [editForm, setEditForm] = useState(false);
+
+  const editFormPage = () => {
+    setEditForm(!editForm);
+  };
+
   return (
     <Fragment>
       <HomePage />
-      <ContentPage />
+      {editForm && <EditContent />}
+      <ContentPage onOpenNewForm={editFormPage} />
     </Fragment>
   );
 };
