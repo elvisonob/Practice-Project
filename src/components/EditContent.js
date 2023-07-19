@@ -17,7 +17,7 @@ const EditContent = () => {
   };
 
   const messageHandler = (e) => {
-    setEditMessage(e.target.value);
+    setEditMessage(e.target.values);
   };
 
   const sendingGetRequest2 = async () => {
