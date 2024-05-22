@@ -80,7 +80,7 @@ const HomePage = () => {
               onChange={onMessageHandler}
             ></textarea>
           </div>
-          <button>Submit</button>
+          <button>Submits</button>
         </div>
       </form>
     </div>
