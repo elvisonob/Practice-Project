@@ -1,25 +1,22 @@
-import CoreConcept from './CoreConcept';
-import TabButton from './TabButton';
+import React, { useState } from 'react';
+import Digits from './Digits';
 
 const HomePage = () => {
-  const onSelectComponents = (selectedButton) => {
-    return <TabButton>{selectedButton}</TabButton>;
+  const [number, setNumber] = useState(null);
+
+  const onHandleNumber = (selectedNumber) => {
+    setNumber(selectedNumber);
   };
 
   return (
-    <div>
-      <CoreConcept title={'one love'} description={'No hate talk'} />
-      <br />
-      <CoreConcept
-        title={'I love Aberdeen'}
-        description={'Infact Scottish people are lovely'}
-      />
-      <TabButton onSelect={() => onSelectComponents('components')}>
-        Components
-      </TabButton>
-      <TabButton onSelect={() => onSelectComponents('props')}>Props</TabButton>
-      <TabButton onSelect={() => onSelectComponents('state')}>State</TabButton>
-      <menu>{onSelectComponents}</menu>
+    <div className="calculator">
+      <div>{number}</div>
+      <br></br>
+      <Digits numbers="1" onSelect={() => onHandleNumber('1')} />
+      <Digits numbers="2" onSelect={() => onHandleNumber('2')} />
+      <Digits numbers="3" onSelect={() => onHandleNumber('3')} />
+      <Digits numbers="4" onSelect={() => onHandleNumber('4')} />
+      <Digits numbers="5" onSelect={() => onHandleNumber('5')} />
     </div>
   );
 };
