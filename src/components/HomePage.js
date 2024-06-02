@@ -2,17 +2,21 @@ import React, { useState } from 'react';
 import Digits from './Digits';
 
 const HomePage = () => {
-  const [firstNumber, setFirstNumber] = useState(null);
-  const [operatorSign, setOperatorSign] = useState();
-  const [secondNumber, setSecondNumber] = useState(null);
+  const [firstNumber, setFirstNumber] = useState('');
+  const [operatorSign, setOperatorSign] = useState('');
+  const [secondNumber, setSecondNumber] = useState('');
   //const [equalTo, setEqualTo] = useState(null);
   const [total, setTotal] = useState('');
 
   const onHandleNumber = (selectedNumber) => {
-    // e.g 1 + 1 = 2
-    if (!firstNumber) {
-      setFirstNumber(selectedNumber);
+    if (!operatorSign) {
+      // If no operator has been selected yet, concatenate to firstNumber
+      setFirstNumber(firstNumber + selectedNumber);
+    } else if (selectedNumber !== '=') {
+      // If an operator has been selected, concatenate to secondNumber
+      setSecondNumber(secondNumber + selectedNumber);
     }
+
     if (
       selectedNumber === '+' ||
       selectedNumber === '-' ||
@@ -20,20 +24,15 @@ const HomePage = () => {
     ) {
       setOperatorSign(selectedNumber);
     }
-    if (firstNumber && operatorSign) {
-      // why is second number turning to equalTo when total is clicked?
-      setSecondNumber(selectedNumber);
-    }
 
-    if (operatorSign === '+' && selectedNumber === '=') {
-      setTotal(parseInt(firstNumber) + parseInt(secondNumber));
-    }
-    if (operatorSign === '-' && selectedNumber === '=') {
-      setTotal(firstNumber - secondNumber);
-    }
-
-    if (operatorSign === '*' && selectedNumber === '=') {
-      setTotal(firstNumber * secondNumber);
+    if (selectedNumber === '=') {
+      if (operatorSign === '+') {
+        setTotal(parseInt(firstNumber) + parseInt(secondNumber));
+      } else if (operatorSign === '-') {
+        setTotal(parseInt(firstNumber) - parseInt(secondNumber));
+      } else if (operatorSign === '*') {
+        setTotal(parseInt(firstNumber) * parseInt(secondNumber));
+      }
     }
   };
 
